@@ -682,6 +682,46 @@
   }
   .btn-teal:hover { background: var(--teal-dark); transform: translateY(-1px); }
 
+  /* ── CONTACT MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(14,28,23,0.55);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none;
+    font-size: 24px; line-height: 1;
+    color: var(--gray); cursor: pointer;
+    width: 28px; height: 28px;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .modal-sub { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
+  .form-label { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink-soft); margin-bottom: 6px; margin-top: 14px; }
+  .form-input {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    color: var(--ink);
+    resize: vertical;
+  }
+  .form-input:focus { outline: none; border-color: var(--teal); }
+
   /* ── CTA SECTION ── */
   .cta-section {
     background: var(--teal-light);
@@ -989,7 +1029,7 @@
           <div class="pm-offer"><div class="offer-dot"></div>Team workshops &amp; onboarding</div>
           <div class="pm-offer"><div class="offer-dot"></div>Portfolio leasing audit</div>
         </div>
-        <a class="btn-teal" style="display:block; text-align:center; text-decoration:none;" href="mailto:ncaldwell1700@gmail.com?subject=Custom%20training%20%26%20coaching%20inquiry&body=Hi%20Norm%2C%0A%0AI'm%20interested%20in%20custom%20training%2Fcoaching%20for%20my%20team.%0A%0AProperty%2Fportfolio%20size%3A%0AWhat%20I'm%20looking%20for%3A%0A">Let's talk →</a>
+        <button class="btn-teal" onclick="openContactModal()">Let's talk →</button>
       </div>
     </div>
   </div>
@@ -1027,6 +1067,35 @@
   <div class="footer-copy">© 2025 Free Leasing Training</div>
 </footer>
 
+<div class="modal-overlay" id="contact-modal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeContactModal()" aria-label="Close">&times;</button>
+    <div id="contact-form-state">
+      <div class="pm-card-label">Work with me</div>
+      <h3 class="modal-title">Tell me about your team</h3>
+      <p class="modal-sub">Fill this out and I'll get back to you to talk through custom training or coaching for your portfolio.</p>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleContactSubmit(event)">
+        <input type="hidden" name="form-name" value="contact">
+        <p hidden><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+        <label class="form-label" for="cf-name">Name</label>
+        <input class="form-input" type="text" id="cf-name" name="name" required>
+        <label class="form-label" for="cf-email">Email</label>
+        <input class="form-input" type="email" id="cf-email" name="email" required>
+        <label class="form-label" for="cf-portfolio">Property / portfolio size</label>
+        <input class="form-input" type="text" id="cf-portfolio" name="portfolio" placeholder="e.g. 1 property, 120 units">
+        <label class="form-label" for="cf-message">What are you looking for?</label>
+        <textarea class="form-input" id="cf-message" name="message" rows="4" required></textarea>
+        <button type="submit" class="btn-teal" style="width:100%; margin-top:8px;">Send →</button>
+      </form>
+    </div>
+    <div id="contact-form-success" hidden>
+      <div class="pm-card-label">Sent</div>
+      <h3 class="modal-title">Thanks — got it!</h3>
+      <p class="modal-sub">I'll follow up at the email you provided shortly.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   // Nav scroll effect
   const nav = document.getElementById('nav');
@@ -1052,6 +1121,37 @@
     const isOpen = unit.classList.contains('open');
     document.querySelectorAll('.unit').forEach(u => u.classList.remove('open'));
     if (!isOpen) unit.classList.add('open');
+  }
+
+  // Contact modal
+  function openContactModal() {
+    document.getElementById('contact-modal').hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contact-modal').hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.getElementById('contact-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'contact-modal') closeContactModal();
+  });
+
+  function handleContactSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => {
+        document.getElementById('contact-form-state').hidden = true;
+        document.getElementById('contact-form-success').hidden = false;
+      })
+      .catch(() => {
+        alert("Something went wrong sending that — please try again or email ncaldwell1700@gmail.com directly.");
+      });
   }
 </script>
 </body>
