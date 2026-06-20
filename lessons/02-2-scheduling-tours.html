@@ -67,6 +67,25 @@
   .sidebar-link:hover { background: white; color: var(--teal-dark); }
   .sidebar-link.active { background: white; color: var(--teal-dark); font-weight: 500; border-left-color: var(--teal); }
   .lesson-wrap { flex: 1; min-width: 0; max-width: 760px; margin: 0 auto; padding: 56px 40px 100px; }
+  .sidebar-toggle {
+    position: sticky;
+    top: 76px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    margin-left: -11px;
+    flex-shrink: 0;
+    z-index: 5;
+    transition: margin-left 0.25s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .sidebar-toggle svg { width: 12px; height: 12px; stroke: var(--ink-soft); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.25s ease; }
+  .lesson-sidebar.collapsed { width: 0; padding: 0; border-right: none; overflow: hidden; }
+  .lesson-layout.collapsed .sidebar-toggle { margin-left: 0; }
+  .lesson-layout.collapsed .sidebar-toggle svg { transform: rotate(180deg); }
   .lesson-eyebrow { font-size: 11px; font-weight: 500; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
   .lesson-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 12px; }
   .lesson-meta { font-size: 13px; color: var(--gray); margin-bottom: 40px; }
@@ -137,6 +156,7 @@
     <a href="05-3-standing-out.html" class="sidebar-link">Standing out</a>
   </div>
 </aside>
+<button class="sidebar-toggle" aria-label="Toggle lesson navigation"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
 <div class="lesson-wrap">
   <div class="lesson-eyebrow">Unit 2 · The prospect journey</div>
   <h1 class="lesson-title">Scheduling and confirming tours</h1>
@@ -178,5 +198,22 @@
   <div class="footer-copy">© 2025 Free Leasing Training</div>
 </footer>
 
+<script>
+(function(){
+  var layout = document.querySelector(".lesson-layout");
+  var sidebar = document.querySelector(".lesson-sidebar");
+  var toggle = document.querySelector(".sidebar-toggle");
+  if (!layout || !sidebar || !toggle) return;
+  if (localStorage.getItem("flt_sidebar_collapsed") === "1") {
+    layout.classList.add("collapsed");
+    sidebar.classList.add("collapsed");
+  }
+  toggle.addEventListener("click", function(){
+    var isCollapsed = sidebar.classList.toggle("collapsed");
+    layout.classList.toggle("collapsed", isCollapsed);
+    localStorage.setItem("flt_sidebar_collapsed", isCollapsed ? "1" : "0");
+  });
+})();
+</script>
 </body>
 </html>
