@@ -93,6 +93,39 @@
   .lesson-body p { margin-bottom: 20px; }
   .lesson-body h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin: 36px 0 16px; color: var(--ink); }
 
+  .download-cta {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--mist);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin: 24px 0 28px;
+  }
+  .download-cta .icon {
+    width: 40px; height: 40px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .download-cta .icon svg { width: 20px; height: 20px; stroke: var(--teal-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .download-cta .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); font-weight: 600; margin-bottom: 4px; }
+  .download-cta h3 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .download-cta p { font-size: 13.5px; color: var(--gray); margin-bottom: 12px !important; }
+  .download-cta a.buy-btn {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+  }
+  .download-cta a.buy-btn:hover { background: var(--teal-dark); }
   .lesson-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); }
   .lesson-nav a { font-size: 14px; font-weight: 500; color: var(--teal); text-decoration: none; display: flex; align-items: center; gap: 6px; }
   .lesson-nav a:hover { color: var(--teal-dark); }
@@ -179,6 +212,18 @@
 
     <h2>End with a clear next step, every time</h2>
     <p>Never end a tour with "let me know if you're interested." Ask directly: "What did you think?" Listen to the answer, then guide them toward the next concrete step — starting an application, seeing a second unit, or getting a question answered that's holding them back. A tour without a clear next step is a tour that's likely to go cold.</p>
+
+    <div class="download-cta">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      </div>
+      <div>
+        <div class="label">Premium download — $4</div>
+        <h3>Tour Prep Checklist</h3>
+        <p>A pre-tour checklist covering unit prep, prospect-specific notes, and a clear close — so every tour starts ready instead of improvised.</p>
+        <a class="buy-btn" href="#" target="_blank" rel="noopener">Get the template &rarr;</a>
+      </div>
+    </div>
 
     <h2>What's next</h2>
     <p>Not every prospect commits on the spot, even after a great tour. The next lesson covers how to follow up afterward — without becoming the agent who won't stop texting.</p>
