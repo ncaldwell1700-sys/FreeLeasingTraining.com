@@ -48,7 +48,25 @@
   .nav-back:hover { color: var(--teal); }
   .nav-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
 
-  .lesson-wrap { max-width: 720px; margin: 0 auto; padding: 140px 24px 100px; }
+  .lesson-layout { display: flex; align-items: flex-start; margin-top: 60px; }
+  .lesson-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--mist);
+    border-right: 1px solid var(--border);
+    padding: 32px 16px 40px;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+  .sidebar-unit { margin-bottom: 22px; }
+  .sidebar-unit-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray); font-weight: 600; margin-bottom: 8px; padding: 0 10px; }
+  .sidebar-link { display: block; font-size: 13.5px; color: var(--ink-soft); text-decoration: none; padding: 7px 10px; border-radius: 6px; margin-bottom: 2px; border-left: 2px solid transparent; }
+  .sidebar-link:hover { background: white; color: var(--teal-dark); }
+  .sidebar-link.active { background: white; color: var(--teal-dark); font-weight: 500; border-left-color: var(--teal); }
+  .lesson-wrap { flex: 1; min-width: 0; max-width: 760px; margin: 0 auto; padding: 56px 40px 100px; }
   .lesson-eyebrow { font-size: 11px; font-weight: 500; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
   .lesson-title { font-family: 'Fraunces', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 12px; }
   .lesson-meta { font-size: 13px; color: var(--gray); margin-bottom: 40px; }
@@ -67,6 +85,8 @@
 
   @media (max-width: 600px) {
     nav { padding: 0 20px; }
+    .lesson-sidebar { display: none; }
+    .lesson-layout { margin-top: 60px; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
   }
 </style>
@@ -84,6 +104,39 @@
   </a>
 </nav>
 
+<div class="lesson-layout">
+<aside class="lesson-sidebar">
+  <div class="sidebar-unit">
+    <div class="sidebar-unit-title">Unit 1 &middot; Foundations</div>
+    <a href="01-1-what-leasing-is.html" class="sidebar-link">What leasing actually is</a>
+    <a href="01-2-leasing-funnel.html" class="sidebar-link">The leasing funnel</a>
+    <a href="01-3-fair-housing-essentials.html" class="sidebar-link">Fair housing essentials</a>
+  </div>
+  <div class="sidebar-unit">
+    <div class="sidebar-unit-title">Unit 2 &middot; The prospect journey</div>
+    <a href="02-1-handling-inquiries.html" class="sidebar-link">Handling inquiries</a>
+    <a href="02-2-scheduling-tours.html" class="sidebar-link">Scheduling tours</a>
+    <a href="02-3-tour-experience.html" class="sidebar-link">The tour experience</a>
+    <a href="02-4-following-up.html" class="sidebar-link">Following up</a>
+  </div>
+  <div class="sidebar-unit">
+    <div class="sidebar-unit-title">Unit 3 &middot; The close</div>
+    <a href="03-1-reading-buying-signals.html" class="sidebar-link">Reading buying signals</a>
+    <a href="03-2-overcoming-objections.html" class="sidebar-link">Overcoming objections</a>
+    <a href="03-3-application-process.html" class="sidebar-link">The application process</a>
+  </div>
+  <div class="sidebar-unit">
+    <div class="sidebar-unit-title">Unit 4 &middot; After the lease</div>
+    <a href="04-1-move-in-experience.html" class="sidebar-link">Move-in experience</a>
+    <a href="04-2-renewals.html" class="sidebar-link active">Renewals</a>
+  </div>
+  <div class="sidebar-unit">
+    <div class="sidebar-unit-title">Unit 5 &middot; Performance &amp; growth</div>
+    <a href="05-1-tracking-your-numbers.html" class="sidebar-link">Tracking your numbers</a>
+    <a href="05-2-working-with-marketing.html" class="sidebar-link">Working with marketing</a>
+    <a href="05-3-standing-out.html" class="sidebar-link">Standing out</a>
+  </div>
+</aside>
 <div class="lesson-wrap">
   <div class="lesson-eyebrow">Unit 4 · After the lease</div>
   <h1 class="lesson-title">Renewals — keeping residents you already have</h1>
@@ -117,6 +170,7 @@
     <div class="spacer"></div>
     <a href="05-1-tracking-your-numbers.html">Next lesson →</a>
   </div>
+</div>
 </div>
 
 <footer>
