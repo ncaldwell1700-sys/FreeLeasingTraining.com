@@ -721,6 +721,39 @@
     resize: vertical;
   }
   .form-input:focus { outline: none; border-color: var(--teal); }
+  .role-btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .role-btn {
+    flex: 1;
+    min-width: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 12px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: var(--radius-sm);
+    background: white;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .role-btn:hover { border-color: var(--teal); }
+  .role-btn.selected { background: var(--teal); border-color: var(--teal); color: white; }
+  .role-fields { margin-top: 4px; }
+  .toggle-btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .toggle-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 20px;
+    background: white;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+  .toggle-btn:hover { border-color: var(--teal); }
+  .toggle-btn.selected { background: var(--teal-light); border-color: var(--teal); color: var(--teal-dark); }
 
   /* ── CTA SECTION ── */
   .cta-section {
@@ -1076,15 +1109,49 @@
       <p class="modal-sub">Fill this out and I'll get back to you to talk through custom training or coaching for your portfolio.</p>
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" onsubmit="handleContactSubmit(event)">
         <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="role" id="cf-role" value="">
+        <input type="hidden" name="interests" id="cf-interests" value="">
         <p hidden><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+
         <label class="form-label" for="cf-name">Name</label>
         <input class="form-input" type="text" id="cf-name" name="name" required>
         <label class="form-label" for="cf-email">Email</label>
         <input class="form-input" type="email" id="cf-email" name="email" required>
-        <label class="form-label" for="cf-portfolio">Property / portfolio size</label>
-        <input class="form-input" type="text" id="cf-portfolio" name="portfolio" placeholder="e.g. 1 property, 120 units">
-        <label class="form-label" for="cf-message">What are you looking for?</label>
-        <textarea class="form-input" id="cf-message" name="message" rows="4" required></textarea>
+
+        <label class="form-label">I am a&hellip;</label>
+        <div class="role-btn-group">
+          <button type="button" class="role-btn" data-role="Leasing Agent" onclick="selectRole(this,'Leasing Agent')">Leasing Agent</button>
+          <button type="button" class="role-btn" data-role="Property Manager" onclick="selectRole(this,'Property Manager')">Property Manager</button>
+          <button type="button" class="role-btn" data-role="Corporate" onclick="selectRole(this,'Corporate')">Corporate</button>
+        </div>
+
+        <div id="role-fields-agent" class="role-fields" hidden>
+          <label class="form-label">What are you interested in? (select any)</label>
+          <div class="toggle-btn-group">
+            <button type="button" class="toggle-btn" onclick="toggleInterest(this)">1:1 Coaching</button>
+            <button type="button" class="toggle-btn" onclick="toggleInterest(this)">Career Growth</button>
+            <button type="button" class="toggle-btn" onclick="toggleInterest(this)">Team Training for My Office</button>
+            <button type="button" class="toggle-btn" onclick="toggleInterest(this)">Premium Templates &amp; Tools</button>
+            <button type="button" class="toggle-btn" onclick="toggleInterest(this)">Other</button>
+          </div>
+        </div>
+
+        <div id="role-fields-manager" class="role-fields" hidden>
+          <label class="form-label" for="cf-manager-units">Portfolio size (units)</label>
+          <input class="form-input" type="text" id="cf-manager-units" name="manager_units" placeholder="e.g. 120 units">
+          <label class="form-label" for="cf-manager-team">Leasing team size</label>
+          <input class="form-input" type="text" id="cf-manager-team" name="manager_team" placeholder="e.g. 3 agents">
+        </div>
+
+        <div id="role-fields-corporate" class="role-fields" hidden>
+          <label class="form-label" for="cf-corp-properties"># of properties under management</label>
+          <input class="form-input" type="text" id="cf-corp-properties" name="corporate_properties" placeholder="e.g. 12 properties">
+          <label class="form-label" for="cf-corp-staff">Total leasing staff across portfolio</label>
+          <input class="form-input" type="text" id="cf-corp-staff" name="corporate_staff" placeholder="e.g. 35 agents">
+        </div>
+
+        <label class="form-label" for="cf-message">Anything else?</label>
+        <textarea class="form-input" id="cf-message" name="message" rows="3"></textarea>
         <button type="submit" class="btn-teal" style="width:100%; margin-top:8px;">Send →</button>
       </form>
     </div>
@@ -1135,6 +1202,24 @@
   document.getElementById('contact-modal').addEventListener('click', (e) => {
     if (e.target.id === 'contact-modal') closeContactModal();
   });
+
+  function selectRole(btn, role) {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('cf-role').value = role;
+
+    document.querySelectorAll('.role-fields').forEach(f => f.hidden = true);
+    if (role === 'Leasing Agent') document.getElementById('role-fields-agent').hidden = false;
+    if (role === 'Property Manager') document.getElementById('role-fields-manager').hidden = false;
+    if (role === 'Corporate') document.getElementById('role-fields-corporate').hidden = false;
+  }
+
+  function toggleInterest(btn) {
+    btn.classList.toggle('selected');
+    const selected = Array.from(document.querySelectorAll('#role-fields-agent .toggle-btn.selected'))
+      .map(b => b.textContent.trim());
+    document.getElementById('cf-interests').value = selected.join(', ');
+  }
 
   function handleContactSubmit(e) {
     e.preventDefault();
