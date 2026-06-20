@@ -388,6 +388,21 @@
   }
 
   /* ── WHO SECTION ── */
+  /* ── WHY SECTION ── */
+  .why-section { background: white; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .why-card {
+    background: var(--mist);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+  }
+  .why-card.featured { background: var(--ink); border-color: var(--ink); }
+  .why-card h3 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .why-card.featured h3 { color: var(--teal-mid); }
+  .why-card p { font-size: 14px; color: var(--gray); line-height: 1.65; font-weight: 300; }
+  .why-card.featured p { color: rgba(255,255,255,0.7); }
+
   .who-section { background: var(--mist); }
 
   .who-grid {
@@ -822,6 +837,7 @@
     section { padding: 64px 20px; }
     .hero { padding: 100px 20px 60px; }
     .who-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
     .pm-inner { grid-template-columns: 1fr; }
     .hero-stats { gap: 24px; flex-wrap: wrap; }
     footer { flex-direction: column; gap: 20px; text-align: center; }
@@ -879,6 +895,31 @@
   <div class="hero-scroll-hint">
     <div class="scroll-label">Scroll</div>
     <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" class="why-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Why this exists</div>
+      <h2 class="section-heading">Most leasing training hasn&rsquo;t<br>changed in 20 years.</h2>
+      <p class="section-sub">The industry moved on — prospects research online, text before they call, and compare a dozen listings before ever touring. Most leasing training didn&rsquo;t move with it.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <h3>The old way</h3>
+        <p>A binder of property facts, a script to recite, and a manager who learned the same way ten or twenty years ago — built for a slower, phone-and-walk-in era of leasing.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <h3>What it misses</h3>
+        <p>How to actually read a text inquiry, what a modern prospect expects in response time, and how to sell a lifestyle to someone who already toured five units on their phone before you ever spoke.</p>
+      </div>
+      <div class="why-card featured reveal reveal-delay-3">
+        <h3>This training</h3>
+        <p>Built around how leasing actually works today — the full funnel, real objections, and the judgment calls that no script can cover. Free, because every agent deserves training that matches the job they&rsquo;re actually doing.</p>
+      </div>
+    </div>
   </div>
 </section>
 
