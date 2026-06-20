@@ -37,6 +37,40 @@
   .lesson-body p { margin-bottom: 20px; }
   .lesson-body h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin: 36px 0 16px; color: var(--ink); }
 
+  .download-cta {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--mist);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin: 24px 0 28px;
+  }
+  .download-cta .icon {
+    width: 40px; height: 40px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .download-cta .icon svg { width: 20px; height: 20px; stroke: var(--teal-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .download-cta .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal-dark); font-weight: 600; margin-bottom: 4px; }
+  .download-cta h3 { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .download-cta p { font-size: 13.5px; color: var(--gray); margin-bottom: 12px !important; }
+  .download-cta a.buy-btn {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+  }
+  .download-cta a.buy-btn:hover { background: var(--teal-dark); }
+
   .lesson-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--border); }
   .lesson-nav a { font-size: 14px; font-weight: 500; color: var(--teal); text-decoration: none; display: flex; align-items: center; gap: 6px; }
   .lesson-nav a:hover { color: var(--teal-dark); }
@@ -77,6 +111,18 @@
 
     <h2>Be upfront about every cost</h2>
     <p>Application fees, deposits, and any other charges should be stated clearly and early — not discovered partway through the form. Surprise costs are one of the fastest ways to lose trust with someone who was otherwise ready to commit. If there's a process for fee waivers or specials, mention it proactively if it applies to them.</p>
+
+    <div class="download-cta">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      </div>
+      <div>
+        <div class="label">Premium download — $5</div>
+        <h3>Fee Disclosure Sheet template</h3>
+        <p>A fill-in-the-blank sheet you can hand prospects at the end of a tour, listing every monthly and move-in cost in one place — so nothing gets "discovered" mid-application.</p>
+        <a class="buy-btn" href="#" target="_blank" rel="noopener">Get the template →</a>
+      </div>
+    </div>
 
     <h2>Make documentation easy</h2>
     <p>Not every prospect has their pay stubs or ID photo ready to go the moment they decide to apply. Tell them exactly what's needed in a simple list they can reference, rather than letting them discover requirements one at a time inside the application itself.</p>
